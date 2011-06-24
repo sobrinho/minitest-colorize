@@ -1,4 +1,5 @@
 require "minitest/colorize/version"
+require "minitest/unit"
 
 module MiniTest
   class Colorize
