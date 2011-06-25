@@ -46,15 +46,11 @@ module MiniTest
     protected
 
     def tint(color, string)
-      "#{color}#{string}#{clear}"
+      "\e[#{color}m#{string}\e[0m"
     end
 
     def colors
-      { "F" => "\e[31m", "E" => "\e[31m", "S" => "\e[33m", "." => "\e[32m" }
-    end
-
-    def clear
-      "\e[0m"
+      { "F" => 31, "E" => 31, "S" => 33, "." => 32 }
     end
   end
 end
