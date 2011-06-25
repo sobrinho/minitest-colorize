@@ -19,6 +19,12 @@ module MiniTest
       end
     end
 
+    def method_missing(method, *args, &block)
+      io.send(method, *args, &block)
+    end
+
+    protected
+
     def tint(color, string)
       "#{color}#{string}#{clear}"
     end
@@ -29,10 +35,6 @@ module MiniTest
 
     def clear
       "\e[0m"
-    end
-
-    def method_missing(method, *args, &block)
-      io.send(method, *args, &block)
     end
   end
 end
