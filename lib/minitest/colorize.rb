@@ -9,12 +9,18 @@ module MiniTest
       self.io = io
     end
 
-    def print(out)
-      if color = colors[out]
-        io.print "#{color}#{out}#{clear}"
+    def print(string = nil)
+      return io.print if string.nil?
+
+      if color = colors[string]
+        io.print tint(color, string)
       else
-        io.print out
+        io.print string
       end
+    end
+
+    def tint(color, string)
+      "#{color}#{string}#{clear}"
     end
 
     def colors

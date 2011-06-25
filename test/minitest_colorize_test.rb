@@ -35,4 +35,11 @@ class MiniTest::ColorizeTest < MiniTest::Unit::TestCase
       colorize.print 'colorize'
     end
   end
+
+  def test_print_without_arguments
+    assert_output '' do
+      colorize = MiniTest::Colorize.new($stdout)
+      colorize.print
+    end
+  end
 end
