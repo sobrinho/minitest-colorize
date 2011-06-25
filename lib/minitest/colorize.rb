@@ -19,6 +19,26 @@ module MiniTest
       end
     end
 
+    def puts(string = nil)
+      return io.puts if string.nil?
+
+      if string =~ /(\d+) tests, (\d+) assertions, (\d+) failures, (\d+) errors, (\d+) skips/
+        color = if $3 != '0'
+                  colors['F']
+                elsif $4 != '0'
+                  colors['E']
+                elsif $5 != '0'
+                  colors['S']
+                else
+                  colors['.']
+                end
+
+        io.puts tint(color, string)
+      else
+        io.puts string
+      end
+    end
+
     def method_missing(method, *args, &block)
       io.send(method, *args, &block)
     end
