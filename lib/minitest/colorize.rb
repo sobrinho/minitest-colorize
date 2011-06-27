@@ -21,7 +21,7 @@ module MiniTest
 
     def puts(string = nil)
       return io.puts if string.nil?
-
+      io.sync = true
       if string =~ /(\d+) tests, (\d+) assertions, (\d+) failures, (\d+) errors, (\d+) skips/
         color = if $3 != '0'
                   colors['F']
