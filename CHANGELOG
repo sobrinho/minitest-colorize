@@ -1,0 +1,14 @@
+master
+
+* Show failing tests instantly
+
+0.0.2 [Sat Jun 25 2011]
+
+* Fix missing require to minitest
+* Colorize status output
+* MiniTest::Colorize#print now accepts call without arguments
+* MiniTest::Colorize#tint, MiniTest::Colorize#colors, and MiniTest::Colorize#clear should be protected
+
+0.0.1 [Fri Jun 24 2011]
+
+* First release
