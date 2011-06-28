@@ -1,10 +1,10 @@
 MiniTest Colorize
 =================
 
-Simple way to colorize output in MiniTest
+Colorize MiniTest output and show failing tests instantly
 
 
-OUTPUT
-======
+Examples
+========
 
-![example](https://github.com/sobrinho/minitest-colorize/raw/master/minitest-colorize.png)
+![example](https://github.com/sobrinho/minitest-colorize/raw/master/examples/example.png)
