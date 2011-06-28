@@ -17,6 +17,13 @@ module MiniTest
       else
         io.print string
       end
+
+      unless report.empty?
+        io.puts
+        io.puts
+        io.puts report.shift
+        io.puts
+      end
     end
 
     def puts(string = nil)
@@ -51,6 +58,10 @@ module MiniTest
 
     def colors
       { "F" => 31, "E" => 31, "S" => 33, "." => 32 }
+    end
+
+    def report
+      MiniTest::Unit.runner.report
     end
   end
 end
