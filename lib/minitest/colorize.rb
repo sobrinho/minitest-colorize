@@ -3,32 +3,34 @@ require "minitest/unit"
 
 module MiniTest
   class Colorize
-    attr_accessor :io
+    attr_accessor :stream
 
-    def initialize(io)
-      self.io = io
+    def initialize(stream = $stdout)
+      self.stream = stream.tap do |stream|
+        stream.sync = true if stream.respond_to?(:sync=)
+      end
     end
 
     def print(string = nil)
-      return io.print if string.nil?
+      return stream.print if string.nil?
 
       if color = colors[string]
-        io.print tint(color, string)
+        stream.print tint(color, string)
       else
-        io.print string
+        stream.print string
       end
 
       unless report.empty?
-        io.puts
-        io.puts
-        io.puts report.shift
-        io.puts
+        stream.puts
+        stream.puts
+        stream.puts report.shift
+        stream.puts
       end
     end
 
     def puts(string = nil)
-      return io.puts if string.nil?
-      io.sync = true
+      return stream.puts if string.nil?
+
       if string =~ /(\d+) tests, (\d+) assertions, (\d+) failures, (\d+) errors, (\d+) skips/
         color = if $3 != '0'
                   colors['F']
@@ -40,14 +42,14 @@ module MiniTest
                   colors['.']
                 end
 
-        io.puts tint(color, string)
+        stream.puts tint(color, string)
       else
-        io.puts string
+        stream.puts string
       end
     end
 
     def method_missing(method, *args, &block)
-      io.send(method, *args, &block)
+      stream.send(method, *args, &block)
     end
 
     protected
@@ -66,4 +68,4 @@ module MiniTest
   end
 end
 
-MiniTest::Unit.output = MiniTest::Colorize.new(MiniTest::Unit.output)
+MiniTest::Unit.output = MiniTest::Colorize.new
