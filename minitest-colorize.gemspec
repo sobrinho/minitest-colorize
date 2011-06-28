@@ -8,8 +8,8 @@ Gem::Specification.new do |s|
   s.authors     = ["Gabriel Sobrinho"]
   s.email       = ["gabriel.sobrinho@gmail.com"]
   s.homepage    = ""
-  s.summary     = %q{Colorize minitest output}
-  s.description = %q{Colorize minitest output}
+  s.summary     = %q{Colorize MiniTest output and show failing tests instantly}
+  s.description = %q{Colorize MiniTest output and show failing tests instantly}
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
