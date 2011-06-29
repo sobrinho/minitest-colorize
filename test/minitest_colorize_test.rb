@@ -37,7 +37,10 @@ class MiniTest::ColorizeTest < MiniTest::Unit::TestCase
   end
 
   def test_print_without_arguments
-    assert_output "" do
+    # ruby 1.9 prints nothing and ruby 1.8 prints 'nil'
+    output = RUBY_VERSION >= '1.9' ? '' : 'nil'
+
+    assert_output output do
       colorize = MiniTest::Colorize.new
       colorize.print
     end
