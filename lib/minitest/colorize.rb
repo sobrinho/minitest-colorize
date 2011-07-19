@@ -14,8 +14,13 @@ module MiniTest
     def print(string = nil)
       return stream.print if string.nil?
 
-      if color = colors[string]
-        stream.print tint(color, string)
+      case string
+      when 'E', 'F'
+        stream.print red(string)
+      when 'S'
+        stream.print yellow(string)
+      when '.'
+        stream.print green(string)
       else
         stream.print string
       end
@@ -32,17 +37,13 @@ module MiniTest
       return stream.puts if string.nil?
 
       if string =~ /(\d+) tests, (\d+) assertions, (\d+) failures, (\d+) errors, (\d+) skips/
-        color = if $3 != '0'
-                  colors['F']
-                elsif $4 != '0'
-                  colors['E']
-                elsif $5 != '0'
-                  colors['S']
-                else
-                  colors['.']
-                end
-
-        stream.puts tint(color, string)
+        if $3 != '0' || $4 != '0'
+          stream.puts red(string)
+        elsif $5 != '0'
+          stream.puts yellow(string)
+        else
+          stream.puts green(string)
+        end
       else
         stream.puts string
       end
@@ -58,8 +59,16 @@ module MiniTest
       "\e[#{color}m#{string}\e[0m"
     end
 
-    def colors
-      { "F" => 31, "E" => 31, "S" => 33, "." => 32 }
+    def red(string)
+      tint(31, string)
+    end
+
+    def green(string)
+      tint(32, string)
+    end
+
+    def yellow(string)
+      tint(33, string)
     end
 
     def report
