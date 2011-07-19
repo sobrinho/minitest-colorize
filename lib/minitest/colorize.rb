@@ -55,8 +55,16 @@ module MiniTest
 
     protected
 
+    def color_enabled?
+      stream.tty?
+    end
+
     def tint(color, string)
-      "\e[#{color}m#{string}\e[0m"
+      if color_enabled?
+        "\e[#{color}m#{string}\e[0m"
+      else
+        string
+      end
     end
 
     def red(string)

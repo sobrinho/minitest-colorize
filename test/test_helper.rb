@@ -1,4 +1,5 @@
 require 'rubygems'
 require 'bundler/setup'
+require 'mocha'
 require 'minitest/autorun'
 require 'minitest-colorize'

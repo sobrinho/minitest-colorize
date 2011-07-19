@@ -1,6 +1,10 @@
 require 'test_helper'
 
 class MiniTest::ColorizeTest < MiniTest::Unit::TestCase
+  def setup
+    MiniTest::Colorize.any_instance.stubs(:color_enabled?).returns(true)
+  end
+
   def test_print_fail
     assert_output "\e[31mF\e[0m" do
       colorize = MiniTest::Colorize.new
