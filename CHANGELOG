@@ -1,3 +1,7 @@
+0.0.4 [Mon Jul 18 2011]
+
+* Colorize output only if output is a tty
+
 0.0.3 [Mon Jun 27 2011]
 
 * Show failing tests instantly
