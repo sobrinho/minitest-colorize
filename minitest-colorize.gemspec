@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.version     = MiniTest::Colorize::VERSION
   s.authors     = ["Gabriel Sobrinho"]
   s.email       = ["gabriel.sobrinho@gmail.com"]
-  s.homepage    = ""
+  s.homepage    = "https://github.com/nohupbrasil/minitest-colorize"
   s.summary     = %q{Colorize MiniTest output and show failing tests instantly}
   s.description = %q{Colorize MiniTest output and show failing tests instantly}
 
