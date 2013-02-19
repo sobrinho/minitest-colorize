@@ -1,16 +1,23 @@
-MiniTest Colorize
-=================
+# MiniTest Colorize
 
-Colorize MiniTest output and show failing tests instantly
+Colorize minitest output and show failing tests instantly.
 
+![minitest-colorize screenshot](https://github.com/sobrinho/minitest-colorize/raw/master/examples/example.png)
 
-Examples
-========
+## Installation
 
-![example](https://github.com/sobrinho/minitest-colorize/raw/master/examples/example.png)
+Add it to your Gemfile:
 
+``` ruby
+gem 'minitest-colorize'
+```
 
-License
-=======
+Run the following command to install it:
+
+``` bash
+bundle install
+```
+
+## License
 
 MIT License. Copyright 2011-2013 Gabriel Sobrinho, gabrielsobrinho.com
