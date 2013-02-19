@@ -20,4 +20,4 @@ bundle install
 
 ## License
 
-MIT License. Copyright 2011-2013 Gabriel Sobrinho, gabrielsobrinho.com
+MIT License. Copyright 2011-2013 Gabriel Sobrinho, http://gabrielsobrinho.com
