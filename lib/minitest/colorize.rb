@@ -1,62 +1,61 @@
 require "minitest/colorize/version"
-require "minitest/unit"
 
-module MiniTest
+module Minitest
   class Colorize
-    attr_accessor :stream
+    attr_reader :io
 
-    def initialize(stream = $stdout)
-      self.stream = stream.tap do |stream|
-        stream.sync = true if stream.respond_to?(:sync=)
-      end
+    def initialize(io = $stdout)
+      @io = io
+    end
+
+    def sync
+      @io.sync
+    end
+
+    def sync=(value)
+      @io.sync = value if @io.respond_to?(:sync)
     end
 
     def print(string = nil)
-      return stream.print if string.nil?
+      return io.print if string.nil?
 
       case string
       when 'E', 'F'
-        stream.print red(string)
+        io.print red(string)
       when 'S'
-        stream.print yellow(string)
+        io.print yellow(string)
       when '.'
-        stream.print green(string)
+        io.print green(string)
       else
-        stream.print string
-      end
-
-      unless report.empty?
-        stream.puts
-        stream.puts
-        stream.puts report.shift
-        stream.puts
+        io.print string
       end
     end
 
     def puts(string = nil)
-      return stream.puts if string.nil?
+      return io.puts if string.nil?
 
-      if string =~ /(\d+) tests, (\d+) assertions, (\d+) failures, (\d+) errors, (\d+) skips/
+      if string =~ /(\d+) runs, (\d+) assertions, (\d+) failures, (\d+) errors, (\d+) skips/
         if $3 != '0' || $4 != '0'
-          stream.puts red(string)
+          io.puts red(string)
         elsif $5 != '0'
-          stream.puts yellow(string)
+          io.puts yellow(string)
         else
-          stream.puts green(string)
+          io.puts green(string)
         end
       else
-        stream.puts string
+        io.puts string.gsub(/\d+\) Skipped:/) { |o| yellow o }
+                      .gsub(/\d+\) (?:Error|Failure):/) { |o| red o }
       end
     end
 
     def method_missing(method, *args, &block)
-      stream.send(method, *args, &block)
+      io.send(method, *args, &block)
     end
 
     protected
 
     def color_enabled?
-      stream.tty?
+      io.tty?
     end
 
     def tint(color, string)
@@ -78,11 +77,6 @@ module MiniTest
     def yellow(string)
       tint(33, string)
     end
-
-    def report
-      MiniTest::Unit.runner.report
-    end
   end
 end
 
-MiniTest::Unit.output = MiniTest::Colorize.new
